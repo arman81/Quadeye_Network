@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>Quadeye Securities Network</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+
+
+    <script>
+
+      // This example creates a 2-pixel-wide red polyline showing the path of
+      // the first trans-Pacific flight between Oakland, CA, and Brisbane,
+      // Australia which was made by Charles Kingsford Smith.
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: {lat: 39.9655097, lng: 9.185059799999976},
+         // mapTypeId: 'terrain'
+          mapTypeId: 'roadmap'
+        });
+
+
+	var markerIcon = {
+	  url: 'http://image.flaticon.com/icons/svg/252/252025.svg',
+	  scaledSize: new google.maps.Size(80, 80),
+	  origin: new google.maps.Point(0, 0),
+	  anchor: new google.maps.Point(32,65),
+	  labelOrigin: new google.maps.Point(40,33)
+	};
+
+
+        var image = 'http://13.228.213.228/static/dc.png';
+	
+  
+  {% for dc,par in data_centre.items %}
+   
+	// ## NSE data cnter ##
+        var dcMarker = new google.maps.Marker({
+          position: {lat: {{ par.latitude }}, lng:{{ par.longitude }} },
+          map: map,
+         // icon: image,
+         // icon: markerIcon,
+	  label: {
+		text: '{{ dc }}',
+		color: "#ffffff",
+		fontSize: "10px",
+		fontWeight: "bold"
+  		}
+        });
+  {% endfor %}      
+
+	// // ## BSE data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 18.929967, lng: 72.833819},
+ //          map: map,
+ //        //  icon: image,
+	//   label: {
+	// 	text: 'BSE',
+	// 	color: "#ffffff",
+	// 	fontSize: "10px",
+	// 	fontWeight: "bold"
+ //  		}
+ //        });
+
+ //        // ## BKC data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 19.069165, lng: 72.871644},
+ //          map: map,
+ //         // icon: image,
+	//   label: {
+	// 	text: 'BKC',
+	// 	color: "#ffffff",
+	// 	fontSize: "10px",
+	// 	fontWeight: "bold"
+ //  		}
+ //        });
+
+ //        // ## LVSB data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 19.0209339, lng: 72.830046},
+ //          map: map,
+ //        //  icon: image,
+	//   label: {
+	// 	text: 'LVSB',
+	// 	color: "#ffffff",
+	// 	fontSize: "7px",
+	// 	fontWeight: "bold"
+ //  		}
+ //        });
+
+ //        // ## MSEI data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 19.069165, lng: 72.871750},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'MSEI',
+ //                color: "#ffffff",
+ //                fontSize: "7px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## CDC data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 19.117522253504372, lng: 72.85667985677719},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'CDC',
+ //                color: "#ffffff",
+ //                fontSize: "10px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## LD4 data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 51.5234541, lng: -0.6360912000000098},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'LD4',
+ //                color: "#ffffff",
+ //                fontSize: "10px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## Interxion data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 51.521263864229816, lng: -0.07419392466545105},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'ITXN',
+ //                color: "#ffffff",
+ //                fontSize: "7px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## SCF (CHINA) data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 31.225408, lng: 121.535656},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'SCF',
+ //                color: "#ffffff",
+ //                fontSize: "10px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## CME data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 41.7965645, lng: -88.24301200000002},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'CME',
+ //                color: "#ffffff",
+ //                fontSize: "10px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## Otkritie (Russia4) data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 55.721818, lng: 37.67831290000004},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'RUSS',
+ //                color: "#ffffff",
+ //                fontSize: "7px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## SGX data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 1.2797533, lng: 103.85007559999997},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'SGX',
+ //                color: "#ffffff",
+ //                fontSize: "10px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## TAIWAN data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 25.036718283940882, lng: 121.52329981327057},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'TAWN',
+ //                color: "#ffffff",
+ //                fontSize: "7px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## NY4 data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 40.77873779999999, lng: -74.07154079999998},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'NY4',
+ //                color: "#ffffff",
+ //                fontSize: "10px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## DGCX data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 25.0694271, lng: 55.14318560000004},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'DGCX',
+ //                color: "#ffffff",
+ //                fontSize: "7px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+ //        // ## Marseille data center ##
+ //        var dcMarker = new google.maps.Marker({
+ //          position: {lat: 43.3108325, lng: 5.37314379999998},
+ //          map: map,
+ //        //  icon: image,
+ //          label: {
+ //                text: 'MRS1',
+ //                color: "#ffffff",
+ //                fontSize: "7px",
+ //                fontWeight: "bold"
+ //                }
+ //        });
+
+
+
+
+
+
+
+
+
+     {% for lk,par in links.items %}
+
+         var lkname ='{{ lk }}'
+        var path1 = [
+          {lat:{{ par.src_latitude }}, lng: {{ par.src_longitude }}},      // NSE-P1
+          {lat: {{ par.dest_latitude }}, lng: {{ par.dest_longitude }}}      // BKC
+        ];
+        var name = new google.maps.Polyline({
+          path: path1,
+          label: lkname,
+          geodesic: true,
+          strokeColor: "#FF0000",
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        name.setMap(map);
+
+     {% endfor %}  
+
+
+
+   //      var linkNSEk3toBSE = [
+   //        {lat: 19.06014, lng: 72.859686},	// NSE-K3
+	  // {lat: 18.929967, lng: 72.833819}	// BSE
+   //      ];
+   //      var linksPathNSEk3toBSE = new google.maps.Polyline({
+   //        path: linkNSEk3toBSE,
+	  //       label: 'NSEk3toBSE',
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathNSEk3toBSE.setMap(map);
+
+
+   //      var linkBKCtoBSE = [
+   //        {lat: 19.069165, lng: 72.871644},      // BKC
+   //        {lat: 18.929967, lng: 72.833819}      // BSE
+   //      ];
+   //      var linksPathBKCtoBSE = new google.maps.Polyline({
+   //        path: linkBKCtoBSE,
+   //        label: 'NSEk3toBSE',
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathBKCtoBSE.setMap(map);
+
+
+
+   //      var linkNSEk3toLVSB = [
+   //        {lat: 19.06014, lng: 72.859686},	// NSE-K3
+	  // {lat: 19.0209339, lng: 72.830046}	// LVSB
+   //      ];
+   //      var linksPathNSEk3toLVSB = new google.maps.Polyline({
+   //        path: linkNSEk3toLVSB,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathNSEk3toLVSB.setMap(map);
+
+   //      var linkBKCtoMSEI = [
+   //        {lat: 19.069165, lng: 72.871644},	// BKC
+	  // {lat: 19.069165, lng: 72.871750}	// MSEI
+   //      ];
+   //      var linksPathBKCtoMSEI = new google.maps.Polyline({
+   //        path: linkBKCtoMSEI,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathBKCtoMSEI.setMap(map);
+
+   //      var linkCDCtoLVSB = [
+   //        {lat: 19.117522, lng: 72.856679},	// CDC
+	  // {lat: 19.0209339, lng: 72.830046}	// LVSB
+   //      ];
+   //      var linksPathCDCtoLVSB = new google.maps.Polyline({
+   //        path: linkCDCtoLVSB,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathCDCtoLVSB.setMap(map);
+
+   //      var linkLVSBtoSGX = [
+   //        {lat: 19.0209339, lng: 72.830046},     // LVSB
+   //        {lat: 1.2797533, lng: 103.85007559999997}     // SGX
+   //      ];
+   //      var linksPathLVSBtoSGX = new google.maps.Polyline({
+   //        path: linkLVSBtoSGX,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLVSBtoSGX.setMap(map);
+
+   //      var linkLVSBtoDGCX = [
+   //        {lat: 19.0209339, lng: 72.830046},     // LVSB
+   //        {lat: 25.0694271, lng: 55.14318560000004}     // DGCX
+   //      ];
+   //      var linksPathLVSBtoDGCX = new google.maps.Polyline({
+   //        path: linkLVSBtoDGCX,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLVSBtoDGCX.setMap(map);
+
+   //      var linkLVSBtoMRS1 = [
+   //        {lat: 19.0209339, lng: 72.830046},     // LVSB
+   //        {lat: 43.3108325, lng: 5.37314379999998}     // MRS1
+   //      ];
+   //      var linksPathLVSBtoMRS1 = new google.maps.Polyline({
+   //        path: linkLVSBtoMRS1,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLVSBtoMRS1.setMap(map);
+
+
+
+   //      var linkLD4toLVSB = [
+   //        {lat: 51.5234541, lng: -0.6360912000000098},	// LD4
+	  // {lat: 19.0209339, lng: 72.830046}	// LVSB
+   //      ];
+   //      var linksPathLD4toLVSB = new google.maps.Polyline({
+   //        path: linkLD4toLVSB,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLD4toLVSB.setMap(map);
+
+   //      var linkITXNtoLVSB = [
+   //        {lat: 51.521263864229816, lng: -0.07419392466545105},	// ITXN
+	  // {lat: 19.0209339, lng: 72.830046}	// LVSB
+   //      ];
+   //      var linksPathITXNtoLVSB = new google.maps.Polyline({
+   //        path: linkITXNtoLVSB,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathITXNtoLVSB.setMap(map);
+
+   //      var linkLD4toITXN = [
+   //        {lat: 51.5234541, lng: -0.6360912000000098},	// LD4
+	  // {lat: 51.521263864229816, lng: -0.07419392466545105}	// ITXN
+   //      ];
+   //      var linksPathLD4toITXN = new google.maps.Polyline({
+   //        path: linkLD4toITXN,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLD4toITXN.setMap(map);
+
+   //      var linkLD4toSCF = [
+   //        {lat: 51.5234541, lng: -0.6360912000000098},  // LD4
+   //        {lat: 31.225408, lng: 121.535656}  // SCF
+   //      ];
+   //      var linksPathLD4toSCF = new google.maps.Polyline({
+   //        path: linkLD4toSCF,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLD4toSCF.setMap(map);
+
+   //      var linkITXNtoSCF = [
+   //        {lat: 51.521263864229816, lng: -0.07419392466545105},  // ITXN
+   //        {lat: 31.225408, lng: 121.535656}  // SCF
+   //      ];
+   //      var linksPathITXNtoSCF = new google.maps.Polyline({
+   //        path: linkITXNtoSCF,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathITXNtoSCF.setMap(map);
+
+   //      var linkLD4toCME = [
+   //        {lat: 51.5234541, lng: -0.6360912000000098},  // LD4
+   //        {lat: 41.7965645, lng: -88.24301200000002}  // CME
+   //      ];
+   //      var linksPathLD4toCME = new google.maps.Polyline({
+   //        path: linkLD4toCME,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLD4toCME.setMap(map);
+
+   //      var linkLD4toRUSS = [
+   //        {lat: 51.5234541, lng: -0.6360912000000098},  // LD4
+   //        {lat: 55.721818, lng: 37.67831290000004}  // RUSS
+   //      ];
+   //      var linksPathLD4toRUSS = new google.maps.Polyline({
+   //        path: linkLD4toRUSS,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathLD4toRUSS.setMap(map);
+
+   //      var linkSGXtoSCF = [
+   //        {lat: 1.2797533, lng: 103.85007559999997},  // SGX
+   //        {lat: 31.225408, lng: 121.535656}  // SCF
+   //      ];
+   //      var linksPathSGXtoSCF = new google.maps.Polyline({
+   //        path: linkSGXtoSCF,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathSGXtoSCF.setMap(map);
+
+   //      var linkSGXtoTAWN = [
+   //        {lat: 1.2797533, lng: 103.85007559999997},  // SGX
+   //        {lat: 25.036718283940882, lng: 121.52329981327057}  // TAIWAN
+   //      ];
+   //      var linksPathSGXtoTAWN = new google.maps.Polyline({
+   //        path: linkSGXtoTAWN,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathSGXtoTAWN.setMap(map);
+
+   //      var linkNY4toCME = [
+   //        {lat: 40.77873779999999, lng: -74.07154079999998},  // NY4
+   //        {lat: 41.7965645, lng: -88.24301200000002}  // CME
+   //      ];
+   //      var linksPathNY4toCME = new google.maps.Polyline({
+   //        path: linkNY4toCME,
+   //        geodesic: true,
+   //        strokeColor: "#FF0000",
+   //        strokeOpacity: 1.0,
+   //        strokeWeight: 2
+   //      });
+   //      linksPathNY4toCME.setMap(map);
+
+
+
+
+
+
+
+
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA851eqrRxpDHtiZOzBOlJVSceTtKZ5i8w&callback=initMap">
+    </script>
+  </body>
+</html>

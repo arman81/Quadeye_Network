@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<script>
+function show_map(){
+  console.log("Executed")
+  window.location.href='map'
+}
+
+function add_centre(){
+  var name=document.getElementById("dc_name").value;
+  var lat=document.getElementById("lat").value;
+  var long=document.getElementById("long").value
+  console.log(name)
+  console.log(lat)
+  console.log("Executed")
+  $.post("add_dc",
+    { 'csrfmiddlewaretoken': document.getElementsByName('csrfmiddlewaretoken')[0].value ,
+      'name':name ,
+      'latitude':lat ,
+      'longitude':long
+    },
+    function(result,status){
+            //console.log(result, "here")
+            result=JSON.parse(result)
+            console.log(result)
+            if(result['resp'] == 'True')
+              alert('Data Centre added!')
+            else
+              alert('Try again')
+          window.location.reload();     
+    });    
+
+}
+
+function add_link(name,src,dest){
+  var name=document.getElementById("link_name").value;
+  var src=$('#src_dc').find(":selected").text();
+  var dest=$('#dest_dc').find(":selected").text();
+  console.log(name,src,dest)
+  $.post('add_link',
+  { 'csrfmiddlewaretoken': document.getElementsByName('csrfmiddlewaretoken')[0].value ,
+    'name': name,
+    'src': src,
+    'dest': dest
+  },
+  function(result,status){
+            result=JSON.parse(result)
+            console.log(result)
+            if(result['resp'] == 'True')
+              alert('Link added!')
+            else
+              alert('Try again')
+            window.location.reload(); 
+  });
+ 
+}
+</script>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Quadeye Network</title>
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}"/>
+
+    <!-- Custom fonts for this template -->
+    <link href="{% static "vendor/font-awesome/css/font-awesome.min.css" %}" rel="stylesheet" type="text/css">
+    <link href="{% static "vendor/simple-line-icons/css/simple-line-icons.css" %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Custom styles for this template -->
+    <link href="{% static "css/landing-page.min.css" %}"" rel="stylesheet">
+
+  </head>
+
+  <body onload="form1.reset();">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-light bg-light static-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">QE securities</a>
+        <a class="btn btn-primary" href="#">Sign In</a>
+      </div>
+    </nav>
+
+    <!-- Masthead -->
+    <header class="masthead text-white text-center">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <h1 class="mb-5">Quadeye Network</h1>
+          </div>
+
+          <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+            <form id="form1">{% csrf_token %}
+              <div class="form-row">
+                <div class="col-xl-9 mx-auto">
+                  <h3 class="mb-5"><u>Add Data Centre</u></h3>
+                </div>
+                <div class="col-12 col-md-9 mb-2 mb-md-0">
+                  <input type="text"  id="dc_name" class="form-control form-control-lg" placeholder="Enter Data Centre Name"> <br>
+                  <input type="text" id="lat" class="form-control form-control-lg" placeholder="Enter Latitude"> <br>
+		             <input type="text" id="long" class="form-control form-control-lg" placeholder="Enter the Longitude">               
+                 </div>
+                <div class="col-6 col-md-3">
+                  <button type="button" class="btn btn-block btn-lg btn-primary" onclick="add_centre()">Add</button>
+                </div>
+
+                  <div class="col-xl-9 mx-auto">
+                    <br><br><br>
+                    <h3 class="mb-5"><u>Add Link</u></h3>
+                  </div>
+                
+                <div class="col-12 col-md-9 mb-2 mb-md-0">
+                <input type="text"  id="link_name" class="form-control form-control-lg" placeholder="Enter Link Name"> <br> 
+                <select class="selectpicker" id="src_dc" data-live-search="true" style="min-width:200px; min-height:40px;">
+                {% for dc in data_centre %}
+                <option data-tokens="{{ dc }}">{{ dc }}</option>
+                {% endfor %}
+                </select>
+                <select class="selectpicker" id="dest_dc" data-live-search="true" style="min-width:200px; min-height:40px;">
+                {% for dc in data_centre %}
+                <option data-tokens="{{ dc }}">{{ dc }}</option>
+                {% endfor %}
+                </select>
+              </div>
+                <div class="col-6 col-md-3">
+                 <button type="button" class="btn btn-block btn-lg btn-primary" onclick="add_link()">Add Link</button></div>
+                </div>
+                <br>
+                <br>
+
+              <button type="button" class="btn btn-block btn-lg btn-primary" onclick="show_map()">Show Map</button>
+              </div>
+              <br>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </header>
+
+
+    <!-- Footer -->
+    <footer class="footer bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6 h-100 text-center text-lg-left my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item">
+                <a href="#">Powered by:QE Securities</a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#"></a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#"></a>
+              </li>
+              <li class="list-inline-item">&sdot;</li>
+              <li class="list-inline-item">
+                <a href="#"></a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">&copy; </p>
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-right my-auto">
+            <ul class="list-inline mb-0">
+           <!--    <li class="list-inline-item mr-3">
+                <a href="#">
+                  <i class="fa fa-facebook fa-2x fa-fw"></i>
+                </a>
+              </li>
+              <li class="list-inline-item mr-3">
+                <a href="#">
+                  <i class="fa fa-twitter fa-2x fa-fw"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fa fa-instagram fa-2x fa-fw"></i>
+                </a>
+              </li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static "vendor/jquery/jquery.min.js" %}""></script>
+    <script src="{% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+
+  </body>
+
+</html>
